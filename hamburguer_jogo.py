@@ -15,7 +15,7 @@ milkshake = pygame.image.load('imagens/milkshake.png').convert_alpha()
 milkshake_menor = pygame.transform.scale(milkshake, (80, 90))
 game = True
 tempo = 60
-tentativas = 0
+vidas = 3
 
 class cliente:
     def __init__(self):
