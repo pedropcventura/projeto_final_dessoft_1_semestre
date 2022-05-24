@@ -23,13 +23,38 @@ class corredor (pygame.sprite.Sprite):
         self.rect.x = 0
         self.rect.y = 233
         self.speedx = 3
+        self.speedy = 3
 
     def update(self):
         self.rect.x += self.speedx
         if self.rect.x == 550:
             self.speedx = 0
+    
+
+    def pulo (self):
+        self.rect.x += self.speedx
+        self.rect.y -= self.speedy
+    
+class comida (pygame.sprite.Sprite):
+    def __init__(self, imagem, rect_x, rect_y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = imagem 
+        self.rect = self.image.get_rect()
+        self.rect.x = rect_x
+        self.rect.y = rect_y
 
 
+todas_comidas = pygame.sprite.Group()
+pos = 0
+for i in range(4):
+    não_comestivel = comida(cebola_menor, 100 + pos, 260 )
+    todas_comidas.add(não_comestivel)
+    pos += 150
+pos = 0
+for i in range(4):
+    comestivel = comida(hamburguer_menor, 50 + pos, 260 )
+    todas_comidas.add(comestivel)
+    pos += 150
 cabeça_maciel = corredor(maciel_menor)
 
 clock = pygame.time.Clock()
@@ -42,13 +67,16 @@ while game:
         # ----- Verifica consequências
         if event.type == pygame.QUIT:
             game = False
+        
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                cabeça_maciel.pulo()
     # ----- Gera saídas
     cabeça_maciel.update()
     window.fill((255, 255, 255))  
     window.blit(fundo_menor, (0,0))
-    window.blit(hamburguer_menor, (70, 260))
-    window.blit(cebola_menor, (120, 260))
     window.blit(cabeça_maciel.imagem, cabeça_maciel.rect)
+    todas_comidas.draw(window)
     # ----- Atualiza estado do jogo
     pygame.display.update()  # Mostra o novo frame para o jogador
 
