@@ -6,7 +6,7 @@ window = pygame.display.set_mode((600, 380))
 fundo = pygame.image.load('imagens/Do google/fundorestaurante.jpg').convert_alpha()
 fundo_menor = pygame.transform.scale(fundo, (600, 380))
 bancada = pygame.image.load('imagens/Do google/Cinza.png')
-bancada_menor = pygame.transform.scale(bancada, (600, 150))
+bancada_menor = pygame.transform.scale(bancada, (600, 200))
 
 game = True
 
@@ -21,8 +21,8 @@ while game:
             game = False
 
     window.fill((255, 255, 255))  
-    window.blit(fundo_menor, (0,0))
-    window.blit(bancada_menor, (0,0))
+    window.blit(fundo_menor, (0,-120))
+    window.blit(bancada_menor, (0,230))
 
     pygame.display.update()
 
