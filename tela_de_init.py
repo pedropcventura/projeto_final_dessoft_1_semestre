@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 
 pygame.display.set_mode((600, 380))
@@ -16,6 +17,10 @@ modo2 = pygame.image.load("imagens/modo2.png")
 modo2 = pygame.transform.scale(modo2, (350, 350))
 
 window = pygame.display.set_mode((600, 380))
+pygame.mixer.init()
+pygame.mixer.music.load("audios/duduc.mp3")
+pygame.mixer.music.set_volume(100)
+pygame.mixer.music.play()
 
 game = True
 while game:
@@ -27,8 +32,8 @@ while game:
     window.blit(image_4k, (0, 0))
     window.blit(pixel, (150, -20))
     
-    window.blit(modo1, (300, 160))
-    window.blit(modo2, (0, 155))
+    window.blit(modo2, (300, 160))
+    window.blit(modo1, (0, 155))
     pygame.display.update()
 
 pygame.quit()
