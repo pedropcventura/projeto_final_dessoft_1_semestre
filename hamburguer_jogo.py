@@ -66,8 +66,9 @@ class chao (pygame.sprite.Sprite):
         self.speedx = 3
 
     def update(self):
-        pass
-
+        self.rect.x -= self.speedx
+        if self.rect.right < 0:
+            self.rect.left = 600
 
 chao_game = chao(solo_menor)
 todas_comidas = pygame.sprite.Group()
