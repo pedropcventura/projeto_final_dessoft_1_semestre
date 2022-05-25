@@ -1,0 +1,1 @@
+s_comidas = pygame.sprite.Gro
