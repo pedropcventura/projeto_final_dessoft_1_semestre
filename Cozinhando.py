@@ -15,6 +15,19 @@ alface = pygame.image.load('imagens/Png/Alface.png')
 alface = pygame.transform.scale(alface, (50, 20))
 
 
+class comida (pygame.sprite.Sprite):
+    def __init__(self, imagem, rect_x, rect_y):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = imagem 
+        self.rect = self.image.get_rect()
+        self.rect.x = rect_x
+        self.rect.y = rect_y
+
+    def update(self):
+        if self.rect.left > 600:
+            pass
+
+
 game = True
 
 clock = pygame.time.Clock()
@@ -23,7 +36,10 @@ while game:
     clock.tick(FPS)
 
     for event in pygame.event.get():
-        # ----- Verifica consequências
+
+        mouse_pos = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+
         if event.type == pygame.QUIT:
             game = False
 
@@ -32,7 +48,10 @@ while game:
     window.blit(bancada, (0,230))
     window.blit(grelha, (400,230))
     window.blit(maquina, (-70,210))
-    window.blit(alface, (200,250))
+    if click[0] == True:
+        window.blit(alface, mouse_pos)
+    else:
+        window.blit(alface, (200,250))
 
     pygame.display.update()
 
