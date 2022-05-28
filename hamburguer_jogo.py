@@ -1,4 +1,4 @@
-
+import pygame
 
 pygame.init()
 
@@ -14,10 +14,8 @@ maciel = pygame.image.load('imagens/maciel.png').convert_alpha()
 maciel_menor = pygame.transform.scale(maciel, (50, 60))
 solo = pygame.image.load('imagens/chao.jpg').convert_alpha() 
 solo_menor = pygame.transform.scale(solo, (600, 233))
-pixel = pygame.image.load('imagens/teini.png')
-pixel = pygame.transform.scale(pixel, (300, 300))
+fonte_pontuação = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
 game = True
-vidas = 3
 class corredor (pygame.sprite.Sprite):
     def __init__(self, imagem):
         pygame.sprite.Sprite.__init__(self)
@@ -96,32 +94,52 @@ todos_chaos.add(chao_game_2)
 
 clock = pygame.time.Clock()
 FPS = 30
+pontuação = 0
+vidas = 3 
+finalizou = 0
+jogando = 1
+perdeu = 2
+estado = jogando
+
 # ===== Loop principal =====
-while game:
+while estado != finalizou :
     clock.tick(FPS)
     # ----- Trata eventos
     for event in pygame.event.get():
         # ----- Verifica consequências
         if event.type == pygame.QUIT:
-            game = False
-        
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                cabeça_maciel.pulo()
+            estado = finalizou
+        if estado == jogando:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    cabeça_maciel.pulo()
     # ----- Gera saídas
     cabeça_maciel.update()
     todos_chaos.update()
     todas_comidas.update()
-    esta_no_chao = pygame.sprite.spritecollide(cabeça_maciel, todos_chaos, False)
-    comeu_comestivel = pygame.sprite.spritecollide(cabeça_maciel, todos_comestiveis, True)
-    for c in esta_no_chao:
-        cabeça_maciel.rect.bottom = c.rect.top
-        cabeça_maciel.speedy = 0
-    for comestivel in comeu_comestivel:
-        c =  comida(hamburguer_menor, 50 + pos, 260 )
-        todos_comestiveis.add(c)
-        todas_comidas.add(c)
-
+    if estado == jogando:
+        esta_no_chao = pygame.sprite.spritecollide(cabeça_maciel, todos_chaos, False)
+        comeu_comestivel = pygame.sprite.spritecollide(cabeça_maciel, todos_comestiveis, True)
+        comeu_não_comestivel = pygame.sprite.spritecollide(cabeça_maciel, todos_não_comestiveis, True)
+        for c in esta_no_chao:
+            cabeça_maciel.rect.bottom = c.rect.top
+            cabeça_maciel.speedy = 0
+        for comestivel in comeu_comestivel:
+            c =  comida(hamburguer_menor, 50 + pos, 260 )
+            todos_comestiveis.add(c)
+            todas_comidas.add(c)
+            pontuação += 100
+        for não_comestivel in comeu_não_comestivel:
+            vidas = -1
+            estado = perdeu
+            c =  comida(cebola_menor, 50 + pos, 260 )
+            todos_não_comestiveis.add(c)
+            todas_comidas.add(c)
+    elif estado == perdeu:
+        if vidas == 0:
+            estado = finalizou
+        else:
+            estado = jogando
 
 
     window.fill((255, 255, 255))  
@@ -129,6 +147,16 @@ while game:
     window.blit(cabeça_maciel.imagem, cabeça_maciel.rect)
     todos_chaos.draw(window)
     todas_comidas.draw(window)
+
+    text_surface = fonte_pontuação.render("{:08d}".format(pontuação), True, (255, 255, 0))
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (600/ 2,  10)
+    window.blit(text_surface, text_rect)
+
+    text_surface = fonte_pontuação.render(chr(9829) * vidas, True, (255, 0, 0))
+    text_rect = text_surface.get_rect()
+    text_rect.bottomleft = (10, 380 - 10)
+    window.blit(text_surface, text_rect)
 
     # ----- Atualiza estado do jogo
     pygame.display.update()  # Mostra o novo frame para o jogador

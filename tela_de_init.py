@@ -5,7 +5,7 @@ pygame.init()
 pygame.display.set_mode((600, 380))
 pygame.display.set_caption("Tela Inicial")
 
-pixel = pygame.image.load('imagens/telainicial.png')
+pixel = pygame.image.load('imagens/teini.png')
 pixel = pygame.transform.scale(pixel, (300, 300))
 
 image_4k = pygame.image.load("imagens/pexels-christian-heitz-842711.jpg")
