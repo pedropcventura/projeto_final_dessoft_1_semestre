@@ -15,7 +15,7 @@ maciel = pygame.image.load('imagens/maciel.png').convert_alpha()
 maciel_menor = pygame.transform.scale(maciel, (50, 60))
 solo = pygame.image.load('imagens/chao.jpg').convert_alpha() 
 solo_menor = pygame.transform.scale(solo, (600, 233))
-fonte_pontuação = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
+fonte_pontuação = pygame.font.Font('PressStart2P.ttf', 28)
    
 game = True
 vidas = 3
