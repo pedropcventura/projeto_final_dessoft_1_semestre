@@ -1,5 +1,4 @@
-from itertools import chain
-import pygame
+
 
 pygame.init()
 
@@ -15,8 +14,8 @@ maciel = pygame.image.load('imagens/maciel.png').convert_alpha()
 maciel_menor = pygame.transform.scale(maciel, (50, 60))
 solo = pygame.image.load('imagens/chao.jpg').convert_alpha() 
 solo_menor = pygame.transform.scale(solo, (600, 233))
-fonte_pontuação = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
-   
+pixel = pygame.image.load('imagens/teini.png')
+pixel = pygame.transform.scale(pixel, (300, 300))
 game = True
 vidas = 3
 class corredor (pygame.sprite.Sprite):
