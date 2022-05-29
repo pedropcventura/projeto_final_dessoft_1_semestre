@@ -1,18 +1,22 @@
+from turtle import width
 import pygame
 
 pygame.init()
 
-window = pygame.display.set_mode((600, 380))
+WIDTH = 1200
+HIGHT = 760
+
+window = pygame.display.set_mode((WIDTH, HIGHT))
 fundo = pygame.image.load('imagens/Do google/fundorestaurante.jpg').convert_alpha()
-fundo = pygame.transform.scale(fundo, (600, 380))
+fundo = pygame.transform.scale(fundo, (WIDTH, HIGHT))
 bancada = pygame.image.load('imagens/Do google/Cinza.png')
-bancada = pygame.transform.scale(bancada, (600, 200))
+bancada = pygame.transform.scale(bancada, (WIDTH, 400))
 grelha = pygame.image.load('imagens/Png/Grelha.png')
-grelha = pygame.transform.scale(grelha, (180, 90))
+grelha = pygame.transform.scale(grelha, (360, 180))
 maquina = pygame.image.load('imagens/Png/Maquina_refri.png')
-maquina = pygame.transform.scale(maquina, (250, 180))
+maquina = pygame.transform.scale(maquina, (500, 360))
 alface = pygame.image.load('imagens/Png/Alface.png')
-alface = pygame.transform.scale(alface, (50, 20))
+alface = pygame.transform.scale(alface, (100, 40))
 
 
 class comida (pygame.sprite.Sprite):
@@ -44,14 +48,14 @@ while game:
             game = False
 
     window.fill((255, 255, 255))  
-    window.blit(fundo, (0,-120))
-    window.blit(bancada, (0,230))
-    window.blit(grelha, (400,230))
-    window.blit(maquina, (-70,210))
+    window.blit(fundo, (0,-240))
+    window.blit(bancada, (0,460))
+    window.blit(grelha, (800,460))
+    window.blit(maquina, (-140,420))
     if click[0] == True:
         window.blit(alface, mouse_pos)
     else:
-        window.blit(alface, (200,250))
+        window.blit(alface, (400,500))
 
     pygame.display.update()
 
