@@ -50,7 +50,7 @@ class Comida (pygame.sprite.Sprite):
 
 game = True
 
-alface1 = Comida(alface_img, alface_pos)
+alface = Comida(alface_img, alface_pos)
 
 clock = pygame.time.Clock()
 FPS = 30
@@ -68,7 +68,7 @@ while game:
     window.blit(grelha, (800,460))
     window.blit(maquina, (-140,420))
     
-    alface1.update()
+    alface.update()
     pygame.display.update()
 
 pygame.quit()
