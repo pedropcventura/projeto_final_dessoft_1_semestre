@@ -65,7 +65,7 @@ class chao (pygame.sprite.Sprite):
         self.speedx = 3
 
     def update(self):
-        self.rect.x -= self.speedx
+        self.rect.x -= self.speedx 
         if self.rect.right < 0:
             self.rect.left = 600
 
