@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 
 window = pygame.display.set_mode((600, 380))
-pygame.display.set_caption('hamburguers')
+pygame.display.set_caption('maciel comendo')
 fundo  = pygame.image.load('imagens/fundo.jpg').convert_alpha()
 fundo_menor = pygame.transform.scale(fundo, (600, 380))
 hamburguer = pygame.image.load('imagens/Png/hamburguer.png').convert_alpha()
@@ -15,7 +15,6 @@ maciel_menor = pygame.transform.scale(maciel, (50, 60))
 solo = pygame.image.load('imagens/chao.jpg').convert_alpha() 
 solo_menor = pygame.transform.scale(solo, (600, 233))
 fonte_pontuação = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
-game = True
 class corredor (pygame.sprite.Sprite):
     def __init__(self, imagem):
         pygame.sprite.Sprite.__init__(self)
@@ -23,9 +22,9 @@ class corredor (pygame.sprite.Sprite):
         self.rect = self.imagem.get_rect()
         self.rect.x = 20
         self.rect.y = 233
-        self.speedx = 0
+        self.speedx = 1.5           
         self.speedy = 3
-        self.gravidade = 3
+        self.gravidade = 1        
 
     def update(self):
         self.rect.x += self.speedx
@@ -36,7 +35,7 @@ class corredor (pygame.sprite.Sprite):
 
     def pulo (self):
         self.rect.x += self.speedx
-        self.speedy = 30
+        self.speedy = 20
         
     
 class comida (pygame.sprite.Sprite):
@@ -62,7 +61,7 @@ class chao (pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = 0
         self.rect.y = 292
-        self.speedx = 3
+        self.speedx = 5
 
     def update(self):
         self.rect.x -= self.speedx
@@ -81,13 +80,13 @@ for i in range(4):
     não_comestivel = comida(cebola_menor, 100 + pos, 260 )
     todas_comidas.add(não_comestivel)
     todos_não_comestiveis.add(não_comestivel)
-    pos += 150
+    pos += 200
 pos = 0
 for i in range(4):
     comestivel = comida(hamburguer_menor, 50 + pos, 260 )
     todas_comidas.add(comestivel)
     todos_comestiveis.add(comestivel)
-    pos += 150
+    pos += 200
 cabeça_maciel = corredor(maciel_menor)
 todos_chaos.add(chao_game)
 todos_chaos.add(chao_game_2)
@@ -130,11 +129,12 @@ while estado != finalizou :
             todas_comidas.add(c)
             pontuação += 100
         for não_comestivel in comeu_não_comestivel:
-            vidas = -1
-            estado = perdeu
             c =  comida(cebola_menor, 50 + pos, 260 )
             todos_não_comestiveis.add(c)
             todas_comidas.add(c)
+        if len(comeu_não_comestivel) > 0:
+            vidas -= 1
+            estado = perdeu
     elif estado == perdeu:
         if vidas == 0:
             estado = finalizou
