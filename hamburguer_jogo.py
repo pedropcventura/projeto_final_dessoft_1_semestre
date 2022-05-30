@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -22,9 +23,9 @@ class corredor (pygame.sprite.Sprite):
         self.rect = self.imagem.get_rect()
         self.rect.x = 20
         self.rect.y = 233
-        self.speedx = 1.5           
+        self.speedx = 0                 
         self.speedy = 3
-        self.gravidade = 1        
+        self.gravidade = 1            
 
     def update(self):
         self.rect.x += self.speedx
@@ -45,12 +46,12 @@ class comida (pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = rect_x
         self.rect.y = rect_y
-        self.speedx = 3
+        self.speedx = 6
 
     def update(self):
         self.rect.x -= self.speedx
         if self.rect.right < 0 :
-             self.rect.left = 600
+             self.rect.left = random.randint(750, 950)
             
 
 
@@ -76,17 +77,17 @@ todos_chaos = pygame.sprite.Group()
 todos_comestiveis = pygame.sprite.Group()
 todos_não_comestiveis = pygame.sprite.Group()
 pos = 0
-for i in range(4):
-    não_comestivel = comida(cebola_menor, 100 + pos, 260 )
+for i in range(3):
+    não_comestivel = comida(cebola_menor, 200 + pos, 260 )
     todas_comidas.add(não_comestivel)
     todos_não_comestiveis.add(não_comestivel)
-    pos += 200
+    pos += 400
 pos = 0
 for i in range(4):
-    comestivel = comida(hamburguer_menor, 50 + pos, 260 )
+    comestivel = comida(hamburguer_menor, 100 + pos, 260 )
     todas_comidas.add(comestivel)
     todos_comestiveis.add(comestivel)
-    pos += 200
+    pos += 400
 cabeça_maciel = corredor(maciel_menor)
 todos_chaos.add(chao_game)
 todos_chaos.add(chao_game_2)
@@ -124,14 +125,17 @@ while estado != finalizou :
             cabeça_maciel.rect.bottom = c.rect.top
             cabeça_maciel.speedy = 0
         for comestivel in comeu_comestivel:
-            c =  comida(hamburguer_menor, 50 + pos, 260 )
+            c =  comida(hamburguer_menor, 800, 260 )
             todos_comestiveis.add(c)
             todas_comidas.add(c)
             pontuação += 100
+            if pontuação % 1000 == 0:
+                vidas += 1
         for não_comestivel in comeu_não_comestivel:
-            c =  comida(cebola_menor, 50 + pos, 260 )
+            c =  comida(cebola_menor, 800, 260 )
             todos_não_comestiveis.add(c)
             todas_comidas.add(c)
+            pos += 200
         if len(comeu_não_comestivel) > 0:
             vidas -= 1
             estado = perdeu
