@@ -77,7 +77,7 @@ todos_chaos = pygame.sprite.Group()
 todos_comestiveis = pygame.sprite.Group()
 todos_não_comestiveis = pygame.sprite.Group()
 pos = 0
-for i in range(4):
+for i in range(2):
     não_comestivel = comida(cebola_menor, 200 + pos, 260 )
     todas_comidas.add(não_comestivel)
     todos_não_comestiveis.add(não_comestivel)
