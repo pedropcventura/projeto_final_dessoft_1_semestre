@@ -19,7 +19,6 @@ pygame.mixer.music.load("audios/duduc.mp3")
 pygame.mixer.music.set_volume(100)
 pygame.mixer.music.play()
 
-jogo = True
 game = True
 while game:
     for event in pygame.event.get():
