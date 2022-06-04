@@ -69,10 +69,6 @@ class chao (pygame.sprite.Sprite):
         if self.rect.right < 0 :
             self.rect.left = 600
 
-chao_game = chao(solo_menor)
-chao_game_2 = chao(solo_menor)
-chao_game_2.rect.x = 600
-todas_comidas = pygame.sprite.Group()
 todos_chaos = pygame.sprite.Group()
 todos_comestiveis = pygame.sprite.Group()
 todos_não_comestiveis = pygame.sprite.Group()
