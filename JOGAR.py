@@ -27,8 +27,10 @@ while game:
             game == False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_z:
+                pygame.mixer.music.stop()
                 roda_jogo_zumbi()
             if event.key == pygame.K_b:
+                pygame.mixer.music.stop()
                 roda_jogo_maciel()
 
         window.fill((255, 255, 255))  
