@@ -1,5 +1,6 @@
 import pygame
 from maciel_foods_versaofacil import *
+from jogo_zumbi import *
 
 pygame.init()
 
@@ -26,7 +27,7 @@ while game:
             game == False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_z:
-                print('z')
+                roda_jogo_zumbi()
             if event.key == pygame.K_b:
                 roda_jogo_maciel()
 
