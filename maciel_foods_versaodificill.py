@@ -4,14 +4,14 @@ import random
 pygame.init()
 
 window = pygame.display.set_mode((600, 380))
-pygame.display.set_caption('maciel comendo')
+pygame.display.set_caption('maciel comendo') 
 fundo  = pygame.image.load('imagens/fundo.jpg').convert_alpha()
 fundo_menor = pygame.transform.scale(fundo, (600, 380))
 hamburguer = pygame.image.load('imagens/Png/hamburguer.png').convert_alpha()
 hamburguer_menor = pygame.transform.scale(hamburguer, (30, 40))
 cebola = pygame.image.load('imagens/Png/cebola.png').convert_alpha()
 cebola_menor = pygame.transform.scale(cebola, (30, 40))
-maciel = pygame.image.load('imagens/maciel.png').convert_alpha()
+maciel = pygame.image.load('imagens/cabeça do macie2l.png').convert_alpha()
 maciel_menor = pygame.transform.scale(maciel, (50, 60))
 solo = pygame.image.load('imagens/chao.jpg').convert_alpha() 
 solo_menor = pygame.transform.scale(solo, (600, 233))
@@ -69,6 +69,11 @@ class chao (pygame.sprite.Sprite):
         if self.rect.right < 0 :
             self.rect.left = 600
 
+
+chao_game = chao(solo_menor)
+chao_game_2 = chao(solo_menor)
+chao_game_2.rect.x = 600
+todas_comidas = pygame.sprite.Group()
 todos_chaos = pygame.sprite.Group()
 todos_comestiveis = pygame.sprite.Group()
 todos_não_comestiveis = pygame.sprite.Group()

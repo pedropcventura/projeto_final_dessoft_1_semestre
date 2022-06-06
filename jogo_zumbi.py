@@ -224,7 +224,7 @@ def roda_jogo_zumbi():
                 self.framee = 0
             self.timer += pygame.time.get_ticks()
             if self.timer > 10000:
-                self.kill()
+            self.kill()
 
     class pessoa_cagando(pygame.sprite.Sprite):
         def __init__(self, img, bottom, centerx):
@@ -402,5 +402,7 @@ def roda_jogo_zumbi():
         janela.blit(text_surface, text_rect)
 
         pygame.display.update()
+
+
 
 
