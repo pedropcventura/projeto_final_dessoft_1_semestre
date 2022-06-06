@@ -10,14 +10,15 @@ fundo  = pygame.image.load('imagens/fundo.jpg').convert_alpha()
 fundo_menor = pygame.transform.scale(fundo, (600, 380))
 hamburguer = pygame.image.load('imagens/Png/hamburguer.png').convert_alpha()
 hamburguer_menor = pygame.transform.scale(hamburguer, (30, 40))
-cebola = pygame.image.load('imagens/Png/cebola.png').convert_alpha()
-cebola_menor = pygame.transform.scale(cebola, (30, 40))
+cebola = pygame.image.load('imagens/cebola.png').convert_alpha()
+cebola_menor = pygame.transform.scale(cebola, (35, 45))
 maciel = pygame.image.load('imagens/cabeça do macie2l.png').convert_alpha()
-maciel_menor = pygame.transform.scale(maciel, (50, 60))
+maciel_menor =  pygame.transform.scale(maciel, (40, 60))
 solo = pygame.image.load('imagens/chao.jpg').convert_alpha() 
 solo_menor = pygame.transform.scale(solo, (600, 233))
 fonte_pontuação = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
-pygame.mixer.music.load('sou_foda.ogg')
+
+pygame.mixer.music.load('sou_foda_mp3.ogg.mp3')
 pygame.mixer.music.set_volume(0.4)
 
 class corredor (pygame.sprite.Sprite):
@@ -82,8 +83,8 @@ todas_comidas = pygame.sprite.Group()
 todos_comestiveis = pygame.sprite.Group()
 todos_não_comestiveis = pygame.sprite.Group()
 pos = 0
-for i in range(3):
-    não_comestivel = comida(cebola_menor, 200 + pos, 260 )
+for i in range(4):
+    não_comestivel = comida(cebola_menor, 200 + pos, 250 )
 
     todas_comidas.add(não_comestivel)
     todos_não_comestiveis.add(não_comestivel)
@@ -94,6 +95,8 @@ for i in range(4):
     todas_comidas.add(comestivel)
     todos_comestiveis.add(comestivel)
     pos += 400
+
+
 cabeça_maciel = corredor(maciel_menor)
 todos_chaos.add(chao_game)
 todos_chaos.add(chao_game_2)
