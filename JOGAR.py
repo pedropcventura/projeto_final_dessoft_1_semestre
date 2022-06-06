@@ -1,5 +1,5 @@
 import pygame
-from maciel_foods_versaofacil import *
+from maciel_foods_versãomedio import *
 from jogo_zumbi import *
 
 pygame.init()
@@ -21,7 +21,7 @@ tela_fim = pygame.transform.scale(tela_fim, (WIDTH, HIGHT))
 pygame.mixer.init()
 pygame.mixer.music.load("audios/duduc.mp3")
 pygame.mixer.music.set_volume(80)
-pygame.mixer.music.play()
+pygame.mixer.music.play() 
 
 
 

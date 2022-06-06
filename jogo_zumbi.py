@@ -81,7 +81,6 @@ def roda_jogo_zumbi():
 
         def shoot(self):
             # A nova bala vai ser criada logo acima e no centro horizontal da nave
-            if len(self.all_missils) < 3:
             if len(self.all_missils) < 1:
                 new_bullet = Missil(self.missil, self.rect.bottom, self.rect.centerx, self.all_sprites,self.explosao)
                 self.all_sprites.add(new_bullet)
@@ -154,7 +153,7 @@ def roda_jogo_zumbi():
         def update(self):
             self.timer += pygame.time.get_ticks()
             if self.timer > 50000:
-            self.kill()
+                self.kill()
             
     all_missils = pygame.sprite.Group()
     all_zombies = pygame.sprite.Group()
