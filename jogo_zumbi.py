@@ -26,14 +26,17 @@ def roda_jogo_zumbi():
 
     clock = pygame.time.Clock()
     FPS = 60
-
+    x=0
     alive = True
     while alive:
 
         clock.tick(FPS)
-
+    
         for event in pygame.event.get():
+            
             if event.type == pygame.QUIT:
+                alive = False
+            if x >=180:
                 alive = False
         
         janela.fill((255, 255, 255))
@@ -57,8 +60,8 @@ def roda_jogo_zumbi():
 
         janela.blit(missil, (285, 125))
 
+        x+=1
 
         pygame.display.update()
 
 
-    pygame.quit()

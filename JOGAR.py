@@ -15,6 +15,9 @@ pixel = pygame.transform.scale(pixel, (WIDTH, HIGHT))
 
 z_or_b = pygame.image.load('imagens/Png/press z or b.png')
 
+tela_fim = pygame.image.load('imagens/Png/hehehehaw.png')
+tela_fim = pygame.transform.scale(tela_fim, (500, 500))
+
 pygame.mixer.init()
 pygame.mixer.music.load("audios/duduc.mp3")
 pygame.mixer.music.set_volume(100)
@@ -68,7 +71,7 @@ game = True
 while game:
 
     clock.tick(FPS)
-
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game == False
@@ -76,9 +79,30 @@ while game:
             if event.key == pygame.K_z:
                 pygame.mixer.music.stop()
                 roda_jogo_zumbi()
+
+                window.blit(tela_fim, (0,0))
+                pygame.mixer.music.load("audios/hehehehaw.mp3")
+                pygame.mixer.music.set_volume(100)
+                pygame.mixer.music.play()
+                check = True
+                while check:
+                    if event.type == pygame.KEYDOWN:
+                        check = False
+
             if event.key == pygame.K_b:
                 pygame.mixer.music.stop()
                 roda_jogo_maciel()
+            
+                window.blit(tela_fim, (0,0))
+                pygame.mixer.music.load("audios/hehehehaw.mp3")
+                pygame.mixer.music.set_volume(100)
+                pygame.mixer.music.play()
+                check = True
+                while check:
+                    if event.type == pygame.KEYDOWN:
+                        check = False
+
+                    
 
     window.fill((255, 255, 255))  
     window.blit(pixel, (0,0))
