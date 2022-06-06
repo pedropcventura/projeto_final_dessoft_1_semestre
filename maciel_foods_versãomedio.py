@@ -38,10 +38,12 @@ class corredor (pygame.sprite.Sprite):
             self.speedx = 0
         self.speedy -= self.gravidade
         self.rect.y -= self.speedy
+        print(self.speedy)
 
     def pulo (self):
-        self.rect.x += self.speedx
-        self.speedy = 20
+        if self.speedy < -10 or self.speedy == 0:
+            self.rect.x += self.speedx
+            self.speedy = 20
         
     
 class comida (pygame.sprite.Sprite):
@@ -83,7 +85,7 @@ todas_comidas = pygame.sprite.Group()
 todos_comestiveis = pygame.sprite.Group()
 todos_não_comestiveis = pygame.sprite.Group()
 pos = 0
-for i in range(4):
+for i in range(3):
     não_comestivel = comida(cebola_menor, 200 + pos, 250 )
 
     todas_comidas.add(não_comestivel)
