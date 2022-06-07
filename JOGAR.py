@@ -1,5 +1,5 @@
 import pygame
-from maciel_foods_versaofacil import *
+from maciel_foods_versãomedio import *
 from jogo_zumbi import *
 
 pygame.init()
@@ -16,12 +16,12 @@ pixel = pygame.transform.scale(pixel, (WIDTH, HIGHT))
 z_or_b = pygame.image.load('imagens/Png/press z or b.png')
 
 tela_fim = pygame.image.load('imagens/Png/hehehehaw.png')
-tela_fim = pygame.transform.scale(tela_fim, (500, 500))
+tela_fim = pygame.transform.scale(tela_fim, (WIDTH, HIGHT))
 
 pygame.mixer.init()
 pygame.mixer.music.load("audios/duduc.mp3")
-pygame.mixer.music.set_volume(100)
-pygame.mixer.music.play()
+pygame.mixer.music.set_volume(80)
+pygame.mixer.music.play() 
 
 
 
@@ -67,52 +67,57 @@ FPS = 60
 
 
 t=0
+final = True
 game = True
-while game:
+tudo = True
 
-    clock.tick(FPS)
-    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            game == False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_z:
-                pygame.mixer.music.stop()
-                roda_jogo_zumbi()
+while tudo:
+    while game:
 
-                window.blit(tela_fim, (0,0))
-                pygame.mixer.music.load("audios/hehehehaw.mp3")
-                pygame.mixer.music.set_volume(100)
-                pygame.mixer.music.play()
-                check = True
-                while check:
-                    if event.type == pygame.KEYDOWN:
-                        check = False
+        clock.tick(FPS)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                tudo = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_z:
+                    pygame.mixer.music.stop()
+                    roda_jogo_zumbi()
+                    game = False
 
-            if event.key == pygame.K_b:
-                pygame.mixer.music.stop()
-                roda_jogo_maciel()
-            
-                window.blit(tela_fim, (0,0))
-                pygame.mixer.music.load("audios/hehehehaw.mp3")
-                pygame.mixer.music.set_volume(100)
-                pygame.mixer.music.play()
-                check = True
-                while check:
-                    if event.type == pygame.KEYDOWN:
-                        check = False
+                if event.key == pygame.K_b:
+                    pygame.mixer.music.stop()
+                    roda_jogo_maciel()
+                    game = False
+                        
+        window.fill((255, 255, 255))  
+        window.blit(pixel, (0,0))
+        
+        if t >= 150:
+            sprites_animacao.draw(window)
+            sprites_animacao.update()
 
-                    
+        t+=1
+        pygame.display.update()
 
-    window.fill((255, 255, 255))  
-    window.blit(pixel, (0,0))
-    
-    if t >= 150:
-        sprites_animacao.draw(window)
-        sprites_animacao.update()
 
-    t+=1
-    pygame.display.update()
-    
+    pygame.mixer.init()
+    pygame.mixer.music.load("audios/hehehehaw.mp3")
+    pygame.mixer.music.set_volume(1000)
+    pygame.mixer.music.play()
+    final = True
+    while final:
+        window = pygame.display.set_mode((WIDTH, HIGHT))
+        window.blit(tela_fim, (0,0))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                tudo = False
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                final = False
+                game = True
+
+        pygame.display.update()
+        
 pygame.quit()
     
