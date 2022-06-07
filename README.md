@@ -12,3 +12,6 @@ Acho que podemos afirmar que o fliperama é mais que completo. O que um jogo nã
 "Você tem que agir. E você tem que estar disposto a fracassar... se você tem medo de fracassar, não irá muito longe." Jobs, Steven
 Foi com essa frase em mente que construimos nosso fliperama. Superando o medo de cantar em público, indo o mais longe possível, sem medo de fracassar para finalmente terminar esse pygame.
 
+Com muito orgulho, Pedro, "PV", Ventura
+                   Lucas, "Strauss", Levi
+                   Eduardo, "Edy", Montandom
