@@ -26,7 +26,7 @@ def roda_jogo_maciel():
 
     # 1.4) inicializa sons
     pygame.mixer.music.load('sou_foda_mp3.ogg.mp3')
-    pygame.mixer.music.set_volume(0.4)
+    pygame.mixer.music.set_volume(1)
 
     # 1.5) inicia estruturas de dados
     class corredor (pygame.sprite.Sprite):

@@ -26,7 +26,7 @@ def roda_jogo_zumbi():
     explosao = pygame.transform.scale(explosao, (157.4,106))
     grito = pygame.mixer.Sound("sons_zombie/cabra_gritando_curto.mp3")
     exp_som = pygame.mixer.Sound("sons_zombie/exp_som_curto.mp3")
-    som_de_fundo = pygame.mixer.Sound("sons_zombie/msa_fundo.mp3")
+    pygame.mixer.music.load('sons_zombie/monstros_sa_estourado.mp3')
     vida1 = pygame.image.load("Pasta_das_imagens_do_jogo_zombie/vida.png")
     vida2 = pygame.image.load("Pasta_das_imagens_do_jogo_zombie/vida.png")
     vida3 = pygame.image.load("Pasta_das_imagens_do_jogo_zombie/vida.png")
@@ -118,11 +118,7 @@ def roda_jogo_zumbi():
                 self.rect.bottom = 370
         
         def shoot(self):
-<<<<<<< HEAD
-            # A nova bala vai ser criada logo acima e no centro horizontal da nave
-=======
             # A nova bala vai ser criada 
->>>>>>> 081a2c3a3a6b564b4fd51cc372c3e50eab220742
             if len(self.all_missils) < 1:
                 new_bullet = Missil(self.missil, self.rect.bottom, self.rect.centerx, self.all_sprites,self.explosao)
                 self.all_sprites.add(new_bullet)
@@ -214,16 +210,9 @@ def roda_jogo_zumbi():
             self.rect.centerx = centerx
             self.rect.y = y - 90
             self.timer = 0
-<<<<<<< HEAD
-        def update(self):
-            self.timer += pygame.time.get_ticks()
-            if self.timer > 50000:
-                self.kill()
-=======
             self.framee = 0
         
             exp_som.play()
->>>>>>> 081a2c3a3a6b564b4fd51cc372c3e50eab220742
             
 
         def update(self):
@@ -296,8 +285,7 @@ def roda_jogo_zumbi():
 
     placar = 0
 
-    som_de_fundo.play()
-
+    pygame.mixer.music.play(loops=-1)
     alive = True
     while alive:
         #falo pro looop so rodar essa quantidade de vezes
@@ -307,6 +295,7 @@ def roda_jogo_zumbi():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 alive = False
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     #toca a musica da bomba caindo e atira
@@ -413,6 +402,9 @@ def roda_jogo_zumbi():
         janela.blit(text_surface, text_rect)
 
         pygame.display.update()
+
+    pygame.mixer.music.stop()
+    print('perdeu')
 
 
 

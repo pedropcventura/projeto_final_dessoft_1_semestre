@@ -79,6 +79,7 @@ while tudo:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 tudo = False
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_z:
                     pygame.mixer.music.stop()
@@ -106,8 +107,9 @@ while tudo:
     pygame.mixer.music.set_volume(1000)
     pygame.mixer.music.play()
     final = True
+    window = pygame.display.set_mode((WIDTH, HIGHT))
     while final:
-        window = pygame.display.set_mode((WIDTH, HIGHT))
+        
         window.blit(tela_fim, (0,0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
