@@ -114,7 +114,7 @@ espera_final=0
 final = True
 game = True
 tudo = True
-
+window = pygame.display.set_mode((WIDTH, HIGHT)) 
 #Loop do jogo inteiro
 while tudo:
     #Começa música dudu
@@ -148,7 +148,7 @@ while tudo:
                     roda_jogo_maciel()
                     game = False
 
-        window = pygame.display.set_mode((WIDTH, HIGHT))                
+                       
         window.fill((255, 255, 255))  
         window.blit(pixel, (0,0))
         
@@ -162,8 +162,9 @@ while tudo:
     #Loop tela final
     pygame.display.set_caption("Tela final")
     final = True
+    window = pygame.display.set_mode((WIDTH, 500))
     while final:
-        window = pygame.display.set_mode((WIDTH, 500))
+        
         pygame.time.wait(25)
         sprites_animacao.draw(window)
         sprites_animacao.update()
