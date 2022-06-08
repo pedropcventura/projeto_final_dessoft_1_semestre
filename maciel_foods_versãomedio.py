@@ -19,7 +19,7 @@ def roda_jogo_maciel():
     solo_menor = pygame.transform.scale(solo, (600, 233))
     fonte_pontuação = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
 
-    pygame.mixer.music.load('sou_foda_mp3.ogg.mp3')
+    pygame.mixer.music.load('audios/duduc.mp3')
     pygame.mixer.music.set_volume(1)
 
     class corredor (pygame.sprite.Sprite):
@@ -119,6 +119,7 @@ def roda_jogo_maciel():
             # ----- Verifica consequências
             if event.type == pygame.QUIT:
                 estado = finalizou
+                pygame.quit()
             if estado == jogando:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:

@@ -294,7 +294,6 @@ def roda_jogo_zumbi():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                alive = False
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
@@ -403,8 +402,6 @@ def roda_jogo_zumbi():
 
         pygame.display.update()
 
-    pygame.mixer.music.stop()
-    print('perdeu')
 
 
 
