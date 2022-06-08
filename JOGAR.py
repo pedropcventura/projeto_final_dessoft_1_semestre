@@ -113,10 +113,11 @@ t=0
 espera_final=0
 final = True
 game = True
-tudo = True
-window = pygame.display.set_mode((WIDTH, HIGHT)) 
+tudo = True 
 #Loop do jogo inteiro
 while tudo:
+    window = pygame.display.set_mode((WIDTH, HIGHT))
+
     #Começa música dudu
     pygame.mixer.init()
     pygame.mixer.music.load("sou_foda_mp3.ogg.mp3")
@@ -169,7 +170,7 @@ while tudo:
         sprites_animacao.draw(window)
         sprites_animacao.update()
 
-        if t>39:
+        if t>46:
             pygame.mixer.init()
             pygame.mixer.music.load("audios/hehehehaw.mp3")
             pygame.mixer.music.set_volume(1000)
@@ -178,7 +179,7 @@ while tudo:
         t+=1
 
 
-        if espera_final > 40:
+        if espera_final > 60:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     tudo = False
@@ -186,6 +187,7 @@ while tudo:
                 if event.type == pygame.KEYDOWN:
                     final = False
                     game = True
+                    espera_final = 0
 
         espera_final+=1
 
