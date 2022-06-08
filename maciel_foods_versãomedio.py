@@ -24,12 +24,8 @@ def roda_jogo_maciel():
     solo_menor = pygame.transform.scale(solo, (600, 233))
     fonte_pontuação = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
 
-
-    pygame.mixer.music.load('audios/duduc.mp3')
-
     # 1.4) inicializa sons
-    pygame.mixer.music.load('sou_foda_mp3.ogg.mp3')
-
+    pygame.mixer.music.load('audios/duduc.mp3')
     pygame.mixer.music.set_volume(1)
 
     # 1.5) inicia estruturas de dados
@@ -54,7 +50,6 @@ def roda_jogo_maciel():
                 self.speedx = 0
             self.speedy -= self.gravidade
             self.rect.y -= self.speedy
-            print(self.speedy)
 
         def pulo (self):
             # veriifica se o usuarios pode pular para poder desviar dos inimigos
@@ -191,7 +186,7 @@ def roda_jogo_maciel():
                 todos_não_comestiveis.add(c)
                 todas_comidas.add(c)
                 pos += 200
-            if len(comeu_não_comestivel) > 0
+            if len(comeu_não_comestivel) > 0:
                  # diminui uma vida a cada vez que o usuario come uma cebola 
                 vidas -= 1
                 estado = perdeu
