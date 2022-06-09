@@ -16,3 +16,5 @@ Com muito orgulho, Pedro, "PV", Ventura
                    Lucas, "Strauss", Levi
                    Eduardo, "Edy", Montandom
                    
+
+Vídeo do game funcionando - https://youtube.com/shorts/sa480CCitAM?feature=share
