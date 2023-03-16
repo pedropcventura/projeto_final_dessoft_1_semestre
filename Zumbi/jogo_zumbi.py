@@ -1,16 +1,21 @@
 import pygame
 import random
+
+from . import constants
+from .sprites.zombie import zombie
+from .sprites.pessoa_cagando import pessoa_cagando
+from .sprites.Protagonista import Protagonista
+
+
 def roda_jogo_zumbi():
     pygame.init()
-    WIDTHG = 550
-    HEIGHTG = 600
-    janela = pygame.display.set_mode((WIDTHG, HEIGHTG))
+    janela = pygame.display.set_mode((constants.WIDTHG, constants.HEIGHTG))
     pygame.display.set_caption("Jogo de Zumbis")
 
     #importa imagens e sons externos, alem de se necessario, muda o tamanho das imagens e fonte
 
     fundo = pygame.image.load("Pasta_das_imagens_do_jogo_zombie/fundo.jpg")
-    fundo = pygame.transform.scale(fundo, (WIDTHG, HEIGHTG-90))
+    fundo = pygame.transform.scale(fundo, (constants.WIDTHG, constants.HEIGHTG-90))
     chao = pygame.image.load("Pasta_das_imagens_do_jogo_zombie/chao_cortado.jpg")
     chao2 = chao = pygame.image.load("Pasta_das_imagens_do_jogo_zombie/chao_cortado.jpg")
     zumbi_img = pygame.image.load('Pasta_das_imagens_do_jogo_zombie/3MfN-0/3MfN-0.png')  
@@ -84,7 +89,7 @@ def roda_jogo_zumbi():
 
             self.image = img
             self.rect = self.image.get_rect()
-            self.rect.centerx = WIDTHG/2
+            self.rect.centerx = constants.WIDTHG/2
             self.rect.y = 30
             self.speedx = 0
             self.speedy = 0
@@ -123,58 +128,6 @@ def roda_jogo_zumbi():
                 new_bullet = Missil(self.missil, self.rect.bottom, self.rect.centerx, self.all_sprites,self.explosao)
                 self.all_sprites.add(new_bullet)
                 self.all_missils.add(new_bullet)
-
-
-    class zombie(pygame.sprite.Sprite):
-        def __init__(self, img):
-            # Construtor da classe mãe (Sprite).
-            pygame.sprite.Sprite.__init__(self)
-
-            self.image = img
-            self.rect = self.image.get_rect()
-            self.rect.x = random.randint(WIDTHG, 600)
-            self.rect.y = 370
-            self.speedx = random.randint(-4,-1)
-            self.framez = 0
-
-        def update(self):
-            #anima o zombie
-            self.image = anim_zom[self.framez]
-            if self.framez < 9:
-                self.framez +=1
-            else:
-                self.framez = 0
-            
-            # Atualizando a posição do zumbi
-            self.rect.x += self.speedx
-
-            if self.rect.x < 125:
-                self.rect.x = random.randint(WIDTHG, 600)
-                self.rect.y = 270
-                self.speedx = random.randint(-4,-1)
-            
-
-    class Protagonista(pygame.sprite.Sprite):
-        def __init__(self, img):
-            # Construtor da classe mãe (Sprite).
-            pygame.sprite.Sprite.__init__(self)
-
-            self.image = img
-            self.rect = self.image.get_rect()
-            self.rect.x = 15
-            self.rect.y = 374
-            self.framep = 0
-        def update(self):
-            #anima o protagonista pato
-            self.image = anim_pro[self.framep]
-            if self.framep < 13:
-                self.framep +=1
-            else:
-                self.framep = 0
-            
-
-
-        
 
     class Missil(pygame.sprite.Sprite):
         # Construtor da classe.
@@ -226,51 +179,27 @@ def roda_jogo_zumbi():
             if self.timer > 10000:
                 self.kill()
 
-    class pessoa_cagando(pygame.sprite.Sprite):
-        def __init__(self, img, bottom, centerx):
-            # Construtor da classe mãe (Sprite).
-            pygame.sprite.Sprite.__init__(self)
-
-            self.image = img.convert_alpha()
-            self.rect = self.image.get_rect()
-            self.rect.centerx = centerx
-            self.rect.bottom = bottom
-            self.speedy = 7  # Velocidade fixa 
-
-        def update(self):
-            # o cagante só se move no eixo y
-            self.rect.y += self.speedy
-
-            # se o cagante chegar no chao morre
-            if self.rect.bottom > 510: 
-                self.rect.bottom = 0
-                self.rect.centerx = random.randint(200, WIDTHG)
-
-        def hitou_helicoptero(self):
-            self.rect.bottom = 0
-            self.rect.centerx = random.randint(200, WIDTHG)
-
     #isso serve para verificar colisoes e interacoes e a forma foi organizada para melhor serem utilizadas       
     all_missils = pygame.sprite.Group()
     all_zombies = pygame.sprite.Group()
     all_sprites = pygame.sprite.Group()
     all_cagantes = pygame.sprite.Group()
     grup_player = pygame.sprite.Group()
-    protag = Protagonista(protagonista)
+    protag = Protagonista(protagonista, anim_pro)
     player = Helicoptero(helicoptero, all_sprites, all_missils, missil,explosao)
-    cagante = pessoa_cagando(pessoa_caindo, 0, random.randint(60, HEIGHTG))
-    cagante2 = pessoa_cagando(pessoa_caindo, 0, random.randint(60, HEIGHTG))
+    cagante = pessoa_cagando(pessoa_caindo, 0, random.randint(60, constants.HEIGHTG))
+    cagante2 = pessoa_cagando(pessoa_caindo, 0, random.randint(60, constants.HEIGHTG))
     all_sprites.add(player)
     all_sprites.add(protag, cagante)
     grup_player.add(player)
 
     for i in range(5):
-        zumbi = zombie(zumbi_img)
+        zumbi = zombie(zumbi_img, anim_zom)
         all_sprites.add(zumbi)
         all_zombies.add(zumbi)
 
     chao_x = 0
-    chao2_x = WIDTHG
+    chao2_x = constants.WIDTHG
     chao_velocidade = -1.7
 
 
@@ -337,7 +266,7 @@ def roda_jogo_zumbi():
         hits = pygame.sprite.groupcollide(all_zombies, all_exp, True, False)
         for z in hits: # As chaves são os elementos do primeiro grupo (all_zombies) que colidiram com alguma explosao
             # O zumbi e morto e precisa ser recriado
-            m = zombie(zumbi_img)
+            m = zombie(zumbi_img, anim_zom)
             all_sprites.add(m)
             all_zombies.add(m)
             placar += 10
@@ -346,7 +275,7 @@ def roda_jogo_zumbi():
         hits_vidas = pygame.sprite.spritecollide(protag, all_zombies, True)
         for z in hits_vidas: # As chaves são os elementos do primeiro grupo (all_zombies) que colidiram com alguma explosao
             # O zumbi e morto e precisa ser recriado
-            m = zombie(zumbi_img)
+            m = zombie(zumbi_img, anim_zom)
             all_sprites.add(m)
             all_zombies.add(m)
         if len(hits_vidas) > 0:
@@ -385,19 +314,19 @@ def roda_jogo_zumbi():
         
 
         #vai movendo os 2 chaos para parecer que as coisas estao correndo (se um dos chaos passar da tela, volta para atras do segundo chao, dessa forma parece que o chao é continuo)
-        chao_posicao = janela.blit(chao, (chao_x, HEIGHTG - 90))
-        chao_2posicao = janela.blit(chao2, (chao2_x, HEIGHTG - 90))
+        chao_posicao = janela.blit(chao, (chao_x, constants.HEIGHTG - 90))
+        chao_2posicao = janela.blit(chao2, (chao2_x, constants.HEIGHTG - 90))
         chao_x += chao_velocidade
         chao2_x += chao_velocidade
-        if chao_x < -WIDTHG:
-            chao_x = WIDTHG
-        if chao2_x < -WIDTHG:
-            chao2_x = WIDTHG
+        if chao_x < -constants.WIDTHG:
+            chao_x = constants.WIDTHG
+        if chao2_x < -constants.WIDTHG:
+            chao2_x = constants.WIDTHG
 
         #desenhando o placar
         text_surface = fonte_placar.render("{:08d}".format(placar), True, (255, 0,0))
         text_rect = text_surface.get_rect()
-        text_rect.midtop = (WIDTHG / 2,  450)
+        text_rect.midtop = (constants.WIDTHG / 2,  450)
         janela.blit(text_surface, text_rect)
 
         pygame.display.update()
