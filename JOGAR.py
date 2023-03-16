@@ -1,6 +1,6 @@
 import pygame
 from maciel_foods_versãomedio import *
-from jogo_zumbi import *
+from Zumbi.jogo_zumbi import roda_jogo_zumbi
 
 pygame.init()
 
@@ -56,36 +56,22 @@ class Animacao(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
         pygame.sprite.Sprite.__init__(self)
         self.sprites = []
-        rei0 = pygame.image.load('imagens/Png/rei0.png')
-        rei0 = pygame.transform.scale(rei0, (WIDTH, 500))
-        rei1 = pygame.image.load('imagens/Png/rei1.png')
-        rei1 = pygame.transform.scale(rei1, (WIDTH, 500))
-        rei2 = pygame.image.load('imagens/Png/rei2.png')
-        rei2 = pygame.transform.scale(rei2, (WIDTH, 500))
-        rei3 = pygame.image.load('imagens/Png/rei3.png')
-        rei3 = pygame.transform.scale(rei3, (WIDTH, 500))
-        rei4 = pygame.image.load('imagens/Png/rei4.png')
-        rei4 = pygame.transform.scale(rei4, (WIDTH, 500))
-        rei5 = pygame.image.load('imagens/Png/rei5.png')
-        rei5 = pygame.transform.scale(rei5, (WIDTH, 500))
-        rei6 = pygame.image.load('imagens/Png/rei6.png')
-        rei6 = pygame.transform.scale(rei6, (WIDTH, 500))
-        rei7 = pygame.image.load('imagens/Png/rei7.png')
-        rei7 = pygame.transform.scale(rei7, (WIDTH, 500))
-        self.sprites.append(rei0)
-        self.sprites.append(rei1)
-        self.sprites.append(rei2)
-        self.sprites.append(rei3)
-        self.sprites.append(rei4)
-        self.sprites.append(rei5)
-        self.sprites.append(rei6)
-        self.sprites.append(rei7)
 
+        image_paths = [ f'imagens/Png/rei{n}.png' for n in range(8) ]
+        for image in image_paths:
+            rei = self.load_and_scale(image)
+            self.sprites.append(rei)
 
         self.current_sprite = 0
         self.image = self.sprites[self.current_sprite]
         self.rect = self.image.get_rect()
         self.rect.topleft = [pos_x, pos_y]
+
+    @classmethod
+    def load_and_scale(cls, path):
+        asset = pygame.image.load(path)
+        scaled_asset = pygame.transform.scale(asset, (WIDTH, 500))
+        return scaled_asset
 
     def update(self):
         self.current_sprite += 0.2
