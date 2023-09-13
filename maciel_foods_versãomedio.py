@@ -12,19 +12,21 @@ def roda_jogo_maciel():
     pygame.display.set_caption('maciel comendo') 
     
     # 1.3)inicializa imagens
-    fundo  = pygame.image.load('imagens/fundo.jpg').convert_alpha()
-    fundo_menor = pygame.transform.scale(fundo, (600, 380))
-    hamburguer = pygame.image.load('imagens/Png/hamburguer.png').convert_alpha()
-    hamburguer_menor = pygame.transform.scale(hamburguer, (30, 40))
-    cebola = pygame.image.load('imagens/cebola.png').convert_alpha()
-    cebola_menor = pygame.transform.scale(cebola, (35, 45))
-    maciel = pygame.image.load('imagens/cabeça do macie2l.png').convert_alpha()
-    maciel_menor =  pygame.transform.scale(maciel, (40, 60))
-    solo = pygame.image.load('imagens/chao.jpg').convert_alpha() 
-    solo_menor = pygame.transform.scale(solo, (600, 233))
+    def carrega_imagem(arquivo, width, heigth):
+        img = pygame.image.load(arquivo).convert_alpha()
+        img_menor = pygame.transform.scale(img, (width, heigth))
+        return img_menor
+
+    fundo_menor  = carrega_imagem('imagens/fundo.jpg' , 600, 380)
+    hamburguer_menor = carrega_imagem('imagens/Png/hamburguer.png', 30, 40)
+    cebola_menor = carrega_imagem('imagens/cebola.png', 35, 45)
+    maciel_menor = carrega_imagem('imagens/cabeça do macie2l.png', 40, 60)
+    solo_menor = carrega_imagem('imagens/chao.jpg',  600, 233)
     fonte_pontuação = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
 
     # 1.4) inicializa sons
+    pygame.mixer.music.load('sou_foda_mp3.ogg.mp3')
+    pygame.mixer.music.set_volume(400)
     pygame.mixer.music.load('audios/duduc.mp3')
     pygame.mixer.music.set_volume(1)
 
