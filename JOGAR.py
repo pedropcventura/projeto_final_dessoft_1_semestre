@@ -3,7 +3,7 @@ from maciel_foods_versãomedio import *
 from jogo_zumbi import *
 
 pygame.init()
-
+ 
 WIDTH = 500
 HIGHT = 600
 
@@ -17,7 +17,7 @@ pixel = pygame.transform.scale(pixel, (WIDTH, HIGHT))
 z_or_b = pygame.image.load('imagens/Png/press z or b.png')
 
 
-#Define classe para o efeito do zoom
+#Define classe para o efeito do zoom 
 class Zoom(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
         pygame.sprite.Sprite.__init__(self)
@@ -115,14 +115,20 @@ final = True
 game = True
 tudo = True 
 #Loop do jogo inteiro
+def inicializa_musica(arquivo, volume):
+     pygame.mixer.init()
+     pygame.mixer.music.load(arquivo)
+     pygame.mixer.music.set_volume(volume)
+     pygame.mixer.music.play()
+
+
 while tudo:
     window = pygame.display.set_mode((WIDTH, HIGHT))
 
     #Começa música dudu
-    pygame.mixer.init()
-    pygame.mixer.music.load("sou_foda_mp3.ogg.mp3")
-    pygame.mixer.music.set_volume(80)
-    pygame.mixer.music.play() 
+    
+    inicializa_musica("sou_foda_mp3.ogg.mp3", 80)
+    
     
 
     #Loop da tela inicial + jogos 
